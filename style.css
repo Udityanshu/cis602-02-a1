@@ -1,0 +1,22 @@
+.student-name,
+.student-id {
+	font-weight: bold;
+	color: green;
+}
+
+.course-title {
+	font-weight: normal;
+	font-style: italic;
+}
+
+.assignment-title {
+	color: red;
+}
+
+#chart svg {
+	border-bottom: 1px solid black;
+}
+
+#highlightYearForm {
+	margin: 20px 0;
+}
