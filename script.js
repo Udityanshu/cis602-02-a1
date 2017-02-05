@@ -1,4 +1,4 @@
-function getTotals() {
+function getTotals(refugees) {
     var totals = [];
     refugees.forEach(function(o) {
         /* convert javascript object to an array */
@@ -32,7 +32,7 @@ function addEltToSVG(svg, name, attrs) {
 }
 
 var width = 600,
-    height = 500;
+    height = 400;
 
 var s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
@@ -42,11 +42,11 @@ s.setAttribute("height", height);
 var main = document.getElementById("chart");
 main.appendChild(s);
 
-var totals = getTotals();
+var totals = getTotals(refugees);
 var years = getYear();
 
 totals.forEach(function(value, index) {
-    var dispVal = value / 500;
+    var dispVal = value / 1000;
     var x = index * (width / totals.length);
     var barWidth = (width / totals.length);
     var rect = addEltToSVG(s, "rect", {
