@@ -52,15 +52,15 @@ main.appendChild(s);
 var totals = getTotals(refugees),
 	years = getYear(),
 	max = Math.max.apply(null, totals),
-	min = Math.min.apply(null, totals),
 	marginY = 30,
 	marginX = 80,
-	ratio = 1 / 700,
-	fontSize = 12;
+	scale = 1 / 700,
+	fontSize = 11,
+	unit = 20000;
 
 /* draw bar chart */
 totals.forEach(function(value, index) {
-    var dispVal = value * ratio,
+    var dispVal = value * scale,
     	x = index * ((width - marginX) / totals.length),
     	barWidth = ((width - marginX) / totals.length);
 
@@ -74,13 +74,32 @@ totals.forEach(function(value, index) {
         "stroke": "black",
         "stroke-width": 1
     });
-    if (index == 0) {
+    /* draw Y axis */
+	var unitHeight = unit * scale,
+		yHeight = max * scale;
+	if (index == 0) {
 	    var rect = addEltToSVG(s, "rect", {
 	        "x": x + (marginX / 2) - 1,
-	        "y": height - (max * ratio) - marginY,
+	        "y": height - yHeight - marginY,
 	        "width": 1,
-	        "height": (max * ratio),
+	        "height": yHeight,
 	        "fill": "black",
+	    });
+	}
+    /* draw Y axis ruler */
+    if (unit * index < max) {
+	    var rect = addEltToSVG(s, "rect", {
+	        "x": (marginX / 2) - 1 - 3,
+	        "y": height - marginY - (unitHeight * index),
+	        "width": 3,
+	        "height": 1,
+	        "fill": "black",
+	    });
+	    var text = addEltToSVG(s, "text", {
+	    	"x": 0,
+	    	"y": height - marginY - (unitHeight * index) + (fontSize / 2),
+	    	"font-size": fontSize,
+	    	"content": unit * index
 	    });
     }
     /* year label */
@@ -91,24 +110,6 @@ totals.forEach(function(value, index) {
     		"font-size": fontSize,
     		"content": years[index]
     	});
-    }
-	/* refugees label */
-    if (index == 0 || value == max || value == min) {
-		if (index == 0) {
-    		var text = addEltToSVG(s, "text", {
-    			"x": 0,
-    			"y": height - marginY,
-    			"font-size": fontSize,
-    			"content": 0
-    		});
-		} else {
-    		var text = addEltToSVG(s, "text", {
-    			"x": 0,
-    			"y": height - dispVal - marginY,
-    			"font-size": fontSize,
-    			"content": value
-    		});
-		}
     }
 });
 
