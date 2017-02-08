@@ -1,3 +1,4 @@
+/* return totals of refugees for each year */
 function getTotals(refugees) {
     var totals = [];
     refugees.forEach(function(o) {
@@ -28,6 +29,10 @@ function addEltToSVG(svg, name, attrs) {
     if (attrs === undefined) attrs = {};
     for (var key in attrs) {
         element.setAttributeNS(null, key, attrs[key]);
+    }
+    if (name == "text") {
+		var textNode = document.createTextNode(attrs['content']);
+		element.appendChild(textNode);
     }
     svg.appendChild(element);
 }
@@ -78,46 +83,34 @@ totals.forEach(function(value, index) {
 	        "fill": "black",
 	    });
     }
+    /* year label */
     if (index == 0 || index == years.length - 1) {
-    	/* year label */
-	    var label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-	   	label.setAttributeNS(null, "x", x + (marginX / 2));
-		label.setAttributeNS(null, "y", height - fontSize);
-		label.setAttributeNS(null, "font-size", fontSize);
-
-		var labelNode = document.createTextNode(years[index]);
-		label.appendChild(labelNode);
-		s.appendChild(label);
-
+    	var text = addEltToSVG(s, "text", {
+    		"x": x + (marginX / 2),
+    		"y": height - fontSize,
+    		"font-size": fontSize,
+    		"content": years[index]
+    	});
     }
+	/* refugees label */
     if (index == 0 || value == max || value == min) {
-	    var label = document.createElementNS("http://www.w3.org/2000/svg", "text");
-		/* refugees label */
-	   	label.setAttributeNS(null, "x", 0);
-		label.setAttributeNS(null, "font-size", fontSize);
-
-		var labelNode = document.createTextNode(0);
 		if (index == 0) {
-			var labelNode = document.createTextNode(0);
-			label.setAttributeNS(null, "y", height - marginY);
+    		var text = addEltToSVG(s, "text", {
+    			"x": 0,
+    			"y": height - marginY,
+    			"font-size": fontSize,
+    			"content": 0
+    		});
 		} else {
-			var labelNode = document.createTextNode(value);
-			label.setAttributeNS(null, "y", height - dispVal - marginY);
+    		var text = addEltToSVG(s, "text", {
+    			"x": 0,
+    			"y": height - dispVal - marginY,
+    			"font-size": fontSize,
+    			"content": value
+    		});
 		}
-		label.appendChild(labelNode);
-		s.appendChild(label);
     }
 });
-
-/* 'US Refugees Bar Chart 1975 - 2016' label */
-var newText = document.createElementNS("http://www.w3.org/2000/svg", "text");
-newText.setAttributeNS(null, "x", (width - 217) / 2);
-newText.setAttributeNS(null, "y", 15);
-newText.setAttributeNS(null, "font-size", "15");
-
-var textNode = document.createTextNode("US Refugees Bar Chart 1975 - 2016");
-newText.appendChild(textNode);
-s.appendChild(newText);
 
 /* function highlightYear() take data from input */
 function highlightYear() {
