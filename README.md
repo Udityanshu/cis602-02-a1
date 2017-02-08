@@ -91,6 +91,7 @@ The following helper function that we discussed in class (or a variant) should b
         return element;
     }
 ![Example Solution for Part 3b](http://www.cis.umassd.edu/~dkoop/dsc530-2017sp/a1/solution-part3.png)
+
 *Example Solution for Part 3b*
 
 Hints:

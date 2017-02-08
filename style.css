@@ -13,8 +13,8 @@
 	color: red;
 }
 
-#chart svg {
-	border-bottom: 1px solid black;
+#chart {
+	text-align: center;
 }
 
 #highlightYearForm {
