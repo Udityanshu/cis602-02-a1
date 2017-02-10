@@ -29,13 +29,12 @@
           <rect x="168" y="112" width="60" height="8" fill="red"></rect>
         </svg>
     </div>
-    <div id="chart">
-      <h5 class="chart-title">US Refugees Bar Chart 1975 - 2016</h5>
-    </div>
-    <div id="highlightYearForm">
-      <label for="inputYear">Highlight Year</label>
-      <input type="text" / id="inputYear" placeholder="press enter to change">
-      <button id="clearHighlight">Clear Highlight</button>
+    <div id="chart"></div>
+    <div id="controls">
+      <label for="year">Year:</label>
+      1975
+      <input type="range" id="year" min="1975" max="2016" value="2002" onchange="highlightYear(this.value)">
+      2016
     </div>
     <script src="http://www.cis.umassd.edu/~dkoop/dsc530-2017sp/a1/us-refugees.js" type="text/javascript"></script>
     <script src="script.js" type="text/javascript"></script>

@@ -114,9 +114,8 @@ totals.forEach(function(value, index) {
 });
 
 /* function highlightYear() take data from input */
-function highlightYear() {
-	var inputYear = document.getElementById('inputYear').value;
-	var chart = document.getElementById("year-" + inputYear);
+function highlightYear(year) {
+	var chart = document.getElementById("year-" + year);
 
 	if (chart) {
 		years.forEach(function(year) {
@@ -125,7 +124,7 @@ function highlightYear() {
 		});
 		chart.setAttribute("fill", "blue");
 	} else {
-		alert("Year Not Found");
+		alert("Year not found");
 	}
 }
 
@@ -135,15 +134,4 @@ function clearHighlight() {
 		var chart = document.getElementById("year-" + year);
 		chart.setAttribute("fill", "red");
 	});
-}
-
-/* map function to DOM elements */
-var inputYear = document.getElementById('inputYear');
-var clearHighlightBtn = document.getElementById('clearHighlight');
-inputYear.onchange = function() {
-	highlightYear();
-};
-clearHighlightBtn.onclick = function() {
-	clearHighlight();
-	inputYear.value = "";
 }

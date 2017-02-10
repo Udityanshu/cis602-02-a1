@@ -52,6 +52,10 @@ For Part 3, we will create a visualization using data from the [U.S. Refugee Pro
 
     <script src="http://www.cis.umassd.edu/~dkoop/dsc530-2017sp/a1/us-refugees.js" type="text/javascript"></script>
 
+or this one for `https`
+
+    <script src="https://rawgit.com/dakoop/060aab964b7e9ca2de4bf22a4f0a8195/raw/ea86ee9949c87da4c55023779bcb74931913dadc/us-refugees.js" type="text/javascript"></script>
+
 You should add this line before any other JavaScript code. Each object has eight properties: `Year`, `Africa`, `Asia`, `Europe`, `Former Soviet Union`,  `Kosovo`, `Latin America/Caribbean`, `Near East/South Asia`.
 
 #### a. Data Processing (JavaScript): 20 points
@@ -76,11 +80,11 @@ Start with an empty `div` element and programmatically create an `svg` element w
     <div id="barchart">
        <!-- NOTHING GOES HERE, USE JAVASCRIPT -->
     </div>
+
 The following helper function that we discussed in class (or a variant) should be useful (you may copy this directly to your solution):
 
-    function makeElt(name, attrs, appendTo)
-    {
-        var element =     document.createElementNS("http://www.w3.org/2000/svg",     name);
+    function makeElt(name, attrs, appendTo) {
+        var element = document.createElementNS("http://www.w3.org/2000/svg", name);
         if (attrs === undefined) attrs = {};
         for (var key in attrs) {
             element.setAttributeNS(null, key, attrs[key]);
@@ -106,7 +110,17 @@ Hints:
 
 #### c. Highlighting: 15 pts
 
-Now, write a function that will highlight a specific bar by year. Specifically, write a function `highlightYear` that given a year (e.g. 2002) will change the appearance of that bar to stand out from the others. This should be static; e.g. **do not update the highlighted bar based on where the mouse is**.
+Now, write a function that will highlight a specific bar by year. Specifically, write a function `highlightYear` that given a year (e.g. 2002) will change the appearance of that bar to stand out from the others. This should be static; e.g. **do not update the highlighted bar based on where the mouse is**. To test your function, consider adding the following HTML after the barchart div.
+
+    <div id="controls">
+      <label for="year">Year:</label>
+      1975
+      <input type="range" id="year" min="1975" max="2016" value="2002"
+         onchange="highlightYear(this.value)">
+      2016
+    </div>
+
+If you wish to use a different input to trigger the highlighting (e.g. the text field below), this is also ok.
 
 Hints
 

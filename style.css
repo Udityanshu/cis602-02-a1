@@ -12,17 +12,3 @@
 .assignment-title {
 	color: red;
 }
-
-#chart {
-	text-align: center;
-}
-
-#chart .chart-title {
-	font-weight: normal;
-	margin: 0;
-}
-
-#highlightYearForm {
-	margin: 20px 0;
-	text-align: center;
-}
