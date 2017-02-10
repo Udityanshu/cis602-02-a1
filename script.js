@@ -1,5 +1,5 @@
 /* return totals of refugees for each year */
-function getTotals(refugees) {
+var getTotals = function(refugees) {
     var totals = [];
     refugees.forEach(function(o) {
         /* convert javascript object to an array */
@@ -18,7 +18,7 @@ function getTotals(refugees) {
 }
 
 /* return an array of years */
-function getYear() {
+var getYear = function() {
 	var years = [];
 	refugees.forEach(function(o) { years.push(o["Year"]) });
 	return years;
@@ -113,25 +113,22 @@ totals.forEach(function(value, index) {
     }
 });
 
-/* function highlightYear() take data from input */
-function highlightYear(year) {
-	var chart = document.getElementById("year-" + year);
-
-	if (chart) {
-		years.forEach(function(year) {
-			var chart = document.getElementById("year-" + year);
-			chart.setAttribute("fill", "red");
-		});
-		chart.setAttribute("fill", "blue");
-	} else {
-		alert("Year not found");
-	}
-}
-
-/* function clearHighlight() clears highlighted bar as well as input year */
-function clearHighlight() {
+/* function clearHighlight() clears highlighted bar */
+var clearHighlight = function() {
 	years.forEach(function(year) {
 		var chart = document.getElementById("year-" + year);
 		chart.setAttribute("fill", "red");
 	});
+}
+
+/* function highlightYear() takes data from input */
+var highlightYear = function(year) {
+	var chart = document.getElementById("year-" + year);
+
+	if (chart) {
+		clearHighlight();
+		chart.setAttribute("fill", "blue");
+	} else {
+		alert("Year not found");
+	}
 }

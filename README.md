@@ -1,5 +1,7 @@
 # Data Visualization (DSC 530/602-02) Assignment 1
 
+## Instructor: Professor [David Koop](http://www.cis.umassd.edu/~dkoop/)
+
 ## Details:
 
 ### 1. Info (HTML & CSS): 10 points
