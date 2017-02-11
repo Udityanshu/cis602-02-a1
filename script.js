@@ -55,7 +55,7 @@ var totals = getTotals(refugees),
 	marginY = 30,
 	marginX = 80,
 	scale = 1 / 700,
-	fontSize = 11,
+	fontSize = 12,
 	unit = 20000;
 
 /* draw bar chart */
@@ -74,6 +74,13 @@ totals.forEach(function(value, index) {
         "stroke": "black",
         "stroke-width": 1
     });
+    var data = addEltToSVG(s, "text", {
+    	"x": x + (marginX / 2) + 5,
+    	"y": height - dispVal - marginY + (fontSize - 2),
+    	"font-size": fontSize - 1,
+    	"content": value,
+    	"transform": "rotate(-90 " + (x + (marginX / 2)) + " " + (height - dispVal - marginY) + ")"
+    });
     /* draw Y axis */
 	var unitHeight = unit * scale,
 		yHeight = max * scale;
@@ -89,12 +96,13 @@ totals.forEach(function(value, index) {
     /* draw Y axis ruler */
     if (unit * index < max) {
 	    var rect = addEltToSVG(s, "rect", {
-	        "x": (marginX / 2) - 1 - 3,
+	        "x": (marginX / 2) - 1 - 2,
 	        "y": height - marginY - (unitHeight * index),
-	        "width": 3,
+	        "width": 2,
 	        "height": 1,
 	        "fill": "black",
 	    });
+	    /* Y axis numbers */
 	    var text = addEltToSVG(s, "text", {
 	    	"x": 0,
 	    	"y": height - marginY - (unitHeight * index) + (fontSize / 2),
@@ -102,7 +110,24 @@ totals.forEach(function(value, index) {
 	    	"content": unit * index
 	    });
     }
+    if (unit * index > max && unit * index < max + unit) {
+    	var text = addEltToSVG(s, "text", {
+    		"x": 0,
+    		"y": height - marginY - (unitHeight * index) + (fontSize / 2),
+    		"font-size": fontSize + 2,
+    		"content": "# Refs."
+    	});
+    }
     /* year label */
+    var midIndex = Math.round(years.length / 2) - 1;
+    if (index == midIndex) {
+    	var text = addEltToSVG(s, "text", {
+    		"x": x + (marginX / 2),
+    		"y": height - fontSize,
+    		"font-size": fontSize + 2,
+    		"content": "Year"
+    	});
+    }
     if (index == 0 || index == years.length - 1) {
     	var text = addEltToSVG(s, "text", {
     		"x": x + (marginX / 2),
@@ -124,7 +149,6 @@ var clearHighlight = function() {
 /* function highlightYear() takes data from input */
 var highlightYear = function(year) {
 	var chart = document.getElementById("year-" + year);
-
 	if (chart) {
 		clearHighlight();
 		chart.setAttribute("fill", "blue");
